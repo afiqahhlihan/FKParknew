@@ -1,0 +1,693 @@
+/* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --primary-color: #003366;
+    /* Deep Navy */
+    --primary-hover: #002244;
+    /* Darker Navy */
+    --accent-color: #0056b3;
+    /* Bright Blue */
+    --bg-color: #eef2f5;
+    /* Light Blue-Grey */
+    --text-color: #333333;
+    /* Dark Grey */
+    --white: #ffffff;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. HEADER STYLES (Used on all pages)
+   ========================================= */
+.fk-header {
+    background-color: var(--primary-color);
+    color: var(--white);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.fk-header .header-logo {
+    position: absolute;
+    left: 40px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.fk-header .header-logo img {
+    height: 100%;
+    width: auto;
+}
+
+.fk-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fk-header .logout-btn {
+    position: absolute;
+    right: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.fk-header .logout-btn:hover {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+/* =========================================
+   3. LOGIN / REGISTER CARD STYLES
+   ========================================= */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 20px;
+}
+
+.card {
+    background: var(--white);
+    padding: 40px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+/* Restrict width only for Login/Register pages, 
+   allow full width for Dashboard */
+.container .card {
+    max-width: 450px;
+    text-align: center;
+}
+
+.card h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.error {
+    color: #d9534f;
+    background: #f9d6d5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* =========================================
+   4. DASHBOARD LAYOUT (Sidebar + Content)
+   ========================================= */
+.dashboard-container {
+    display: flex;
+    min-height: calc(100vh - 80px);
+}
+
+.sidebar {
+    width: 260px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu a {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 15px 25px;
+    transition: all 0.3s;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background-color: var(--primary-hover);
+    color: var(--white);
+    border-left: 4px solid var(--accent-color);
+    padding-left: 21px;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: var(--bg-color);
+    padding: 40px;
+}
+
+/* Profile Image in header/sidebar if needed */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+}
+
+/* --- TAB SYSTEM --- */
+.tab-header {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 25px;
+}
+
+.tab-link {
+    padding: 12px 25px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #888;
+    border: none;
+    background: none;
+    transition: 0.3s;
+}
+
+.tab-link.active {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.tab-content {
+    display: none;
+    /* Hidden by default */
+}
+
+.tab-content.active {
+    display: block;
+    /* Shown when active */
+    animation: fadeIn 0.4s ease;
+}
+
+.edit-btn {
+    background-color: var(--accent-color);
+    width: auto !important;
+    display: inline-block;
+    padding: 8px 20px !important;
+}
+
+.save-btn {
+    background-color: #28a745 !important;
+    width: auto !important;
+    display: inline-block;
+    padding: 8px 20px !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --primary-color: #003366;
+    --primary-hover: #002244;
+    --accent-color: #0056b3;
+    --bg-color: #eef2f5;
+    --text-color: #333333;
+    --white: #ffffff;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* =========================================
+   2. HEADER STYLES (Used on all pages)
+   ========================================= */
+.fk-header {
+    background-color: var(--primary-color);
+    color: var(--white);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.fk-header .header-logo {
+    position: absolute;
+    left: 40px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.fk-header .header-logo img {
+    height: 100%;
+    width: auto;
+}
+
+.fk-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fk-header .logout-btn {
+    position: absolute;
+    right: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.fk-header .logout-btn:hover {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+/* =========================================
+   3. LOGIN / REGISTER CARD STYLES
+   ========================================= */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 20px;
+}
+
+.card {
+    background: var(--white);
+    padding: 40px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+/* Default card width for Login page */
+.container .card {
+    max-width: 450px;
+    text-align: center;
+}
+
+/* --- DOUBLE COLUMN LOGIC (RESTORED) --- */
+/* Overrides standard width for the Registration page only */
+.container .card.registration-card {
+    max-width: 850px;
+    text-align: left;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 30px;
+}
+
+.grid-full {
+    grid-column: span 2;
+}
+
+/* Logic Guidance Text Styles */
+.guidance-text {
+    display: block;
+    font-size: 11px;
+    color: #6c757d;
+    margin-top: 2px;
+}
+
+/* Logic: Error Highlighting */
+.input-error {
+    border: 2px solid #d9534f !important;
+    background-color: #fff8f8;
+}
+
+.error-msg {
+    color: #d9534f;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 2px;
+    display: block;
+}
+
+.btn-flex {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.btn-clear {
+    background-color: #6c757d;
+}
+
+.card h2 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.error {
+    color: #d9534f;
+    background: #f9d6d5;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* =========================================
+   4. DASHBOARD LAYOUT (Sidebar + Content)
+   ========================================= */
+.dashboard-container {
+    display: flex;
+    min-height: calc(100vh - 80px);
+}
+
+.sidebar {
+    width: 260px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu a {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 15px 25px;
+    transition: all 0.3s;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background-color: var(--primary-hover);
+    color: var(--white);
+    border-left: 4px solid var(--accent-color);
+    padding-left: 21px;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: var(--bg-color);
+    padding: 40px;
+}
+
+/* Profile Image in header/sidebar if needed */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+}
+
+/* --- TAB SYSTEM --- */
+.tab-header {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 25px;
+}
+
+.tab-link {
+    padding: 12px 25px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #888;
+    border: none;
+    background: none;
+    transition: 0.3s;
+}
+
+.tab-link.active {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.tab-content {
+    display: none;
+    /* Hidden by default */
+}
+
+.tab-content.active {
+    display: block;
+    /* Shown when active */
+    animation: fadeIn 0.4s ease;
+}
+
+.edit-btn {
+    background-color: var(--accent-color);
+    width: auto !important;
+    display: inline-block;
+    padding: 8px 20px !important;
+}
+
+.save-btn {
+    background-color: #28a745 !important;
+    width: auto !important;
+    display: inline-block;
+    padding: 8px 20px !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 650px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-full {
+        grid-column: span 1;
+    }
+}
+
+.success {
+    background: #d4edda;
+    color: #155724;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+}
